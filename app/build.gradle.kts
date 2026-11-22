@@ -27,5 +27,6 @@ dependencies {
     implementation("androidx.media3:media3-session:1.7.1")
     implementation("io.github.anilbeesetti:nextlib-media3ext:1.7.1-0.9.0")
     implementation("com.google.guava:guava:33.3.0-android")
+    implementation("com.github.AdrienPoupa:jaudiotagger:2.2.3")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
 }
