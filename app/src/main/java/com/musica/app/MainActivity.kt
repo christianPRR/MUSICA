@@ -92,6 +92,7 @@ class MainActivity : ComponentActivity() {
             var playing by remember { mutableStateOf(false) }
             var currentId by remember { mutableStateOf<String?>(null) }
             var showPlayer by remember { mutableStateOf(false) }
+            var showSettings by remember { mutableStateOf(false) }
             DisposableEffect(controller) {
                 val c = controller
                 playing = c?.isPlaying ?: false
@@ -107,7 +108,7 @@ class MainActivity : ComponentActivity() {
 
             Box(Modifier.fillMaxSize()) {
                 Scaffold(
-                    topBar = { LargeTopAppBar(title = { Text("MUSICA") }) },
+                    topBar = { LargeTopAppBar(title = { Text("MUSICA") }, actions = { IconButton({ showSettings = true }) { Icon(Icons.Default.Settings, "Ajustes") } }) },
                     bottomBar = {
                         Surface(tonalElevation = 3.dp, modifier = Modifier.clickable(enabled = current != null) { showPlayer = true }) {
                             Row(Modifier.fillMaxWidth().navigationBarsPadding().padding(12.dp),
@@ -146,6 +147,10 @@ class MainActivity : ComponentActivity() {
                 if (showPlayer && current != null) {
                     BackHandler { showPlayer = false }
                     PlayerScreen(current, controller, playing) { showPlayer = false }
+                }
+                if (showSettings) {
+                    BackHandler { showSettings = false }
+                    SettingsScreen { showSettings = false }
                 }
             }
         }
